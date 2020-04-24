@@ -97,6 +97,6 @@ input[type=text]{
 a:hover{
     text-decoration: none;
 }
-#comment-in, #comment-out{
-    transition: 1.2s ease;
+#section-6, #section-7{
+    display: none;
 }
