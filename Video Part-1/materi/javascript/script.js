@@ -36,7 +36,7 @@
         shippingState = state.value,
         shippingMethod = document.querySelector("[name=r_method]:checked").value;
 
-        var totalQty = itemBball + itemJersey + itemPower + itemWater, 
+        var totalQty = +itemBball + +itemJersey + +itemPower + +itemWater, 
         shippingCostPer, shippingCost, taxFactor = 1, 
         estimate, totalItemPrice = 90 * itemBball + 25 * itemJersey + 30 * itemPower + 4 * itemWater;
 
@@ -73,7 +73,6 @@
         results.innerHTML += "Total Shipping: $" + shippingCost.toFixed(2) + "</br>";
 
         results.innerHTML += "Tax: " + ((taxFactor - 1) * 100).toFixed(2) + "% (" + shippingState + ")";
-
         }
 
     });
