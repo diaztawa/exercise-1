@@ -32,15 +32,18 @@
         var itemBball = document.getElementById("txt-q-bball").value,
         itemJersey = document.getElementById("txt-q-jersey").value,
         itemPower = document.getElementById("txt-q-power").value,
+        itemWater = document.getElementById("txt-q-water").value,
         shippingState = state.value,
         shippingMethod = document.querySelector("[name=r_method]:checked").value;
 
-        var totalQty = itemBball + itemJersey + itemPower, 
+        var totalQty = itemBball + itemJersey + itemPower + itemWater, 
         shippingCostPer, shippingCost, taxFactor = 1, 
-        estimate, totalItemPrice = 90 * itemBball + 25 * itemJersey + 30 * itemPower;
+        estimate, totalItemPrice = 90 * itemBball + 25 * itemJersey + 30 * itemPower + 4 * itemWater;
 
         if(shippingState === "CA"){
             taxFactor = 1.075;
+        }else if(shippingState === "WA"){
+            taxFactor = 1.065;
         }
 
         switch (shippingMethod) {
@@ -59,11 +62,17 @@
                 break;
         }
 
-        shippingCost = shippingCostPer = totalQty;
+        shippingCost = shippingCostPer * totalQty;
 
-        estimate = totalItemPrice * taxFactor + shippingCost;
+        estimate = "$" + (totalItemPrice * taxFactor + shippingCost).toFixed(2);
 
         document.getElementById("txt-estimate").value = estimate;
+
+        var results = document.getElementById("results");
+        results.innerHTML = "total items: " + totalQty + "</br>";
+        results.innerHTML += "Total Shipping: $" + shippingCost.toFixed(2) + "</br>";
+
+        results.innerHTML += "Tax: " + ((taxFactor - 1) * 100).toFixed(2) + "% (" + shippingState + ")";
 
         }
 
